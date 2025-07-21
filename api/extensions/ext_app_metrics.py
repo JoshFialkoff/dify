@@ -5,10 +5,10 @@ import threading
 from flask import Response
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     @app.after_request
     def after_request(response):
         """Add Version headers to the response."""

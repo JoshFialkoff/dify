@@ -1,8 +1,8 @@
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     # register blueprint routers
 
     from flask_cors import CORS  # type: ignore

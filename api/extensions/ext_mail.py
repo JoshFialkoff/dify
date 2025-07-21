@@ -4,7 +4,7 @@ from typing import Optional
 from flask import Flask
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 
 
 class Mail:
@@ -99,7 +99,7 @@ def is_enabled() -> bool:
     return dify_config.MAIL_TYPE is not None and dify_config.MAIL_TYPE != ""
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     mail.init_app(app)
 
 

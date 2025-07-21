@@ -3,18 +3,18 @@ import time
 
 from configs import dify_config
 from contexts.wrapper import RecyclableContextVar
-from dify_app import DifyApp
+from dify_app import Flask
 
 
 # ----------------------------
 # Application Factory Function
 # ----------------------------
-def create_flask_app_with_configs() -> DifyApp:
+def create_flask_app_with_configs() -> Flask:
     """
     create a raw flask app
     with configs loaded from .env file
     """
-    dify_app = DifyApp(__name__)
+    dify_app = Flask(__name__)
     dify_app.config.from_mapping(dify_config.model_dump())
 
     # add before request hook
@@ -26,7 +26,7 @@ def create_flask_app_with_configs() -> DifyApp:
     return dify_app
 
 
-def create_app() -> DifyApp:
+def create_app() -> Flask:
     start_time = time.perf_counter()
     app = create_flask_app_with_configs()
     initialize_extensions(app)
@@ -36,7 +36,7 @@ def create_app() -> DifyApp:
     return app
 
 
-def initialize_extensions(app: DifyApp):
+def initialize_extensions(app: Flask):
     from extensions import (
         ext_app_metrics,
         ext_blueprints,

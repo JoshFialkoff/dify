@@ -11,7 +11,7 @@ from redis.connection import Connection, SSLConnection
 from redis.sentinel import Sentinel
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,7 @@ class RedisClientWrapper:
 redis_client = RedisClientWrapper()
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     global redis_client
     connection_class: type[Union[Connection, SSLConnection]] = Connection
     if dify_config.REDIS_USE_SSL:

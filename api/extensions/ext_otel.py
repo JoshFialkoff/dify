@@ -11,7 +11,7 @@ from celery.signals import worker_init  # type: ignore
 from flask_login import user_loaded_from_request, user_logged_in  # type: ignore
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 from libs.helper import extract_tenant_id
 from models import Account, EndUser
 
@@ -36,7 +36,7 @@ def on_user_loaded(_sender, user: Union["Account", "EndUser"]):
                 pass
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     from opentelemetry.semconv.trace import SpanAttributes
 
     def is_celery_worker():
@@ -46,7 +46,7 @@ def init_app(app: DifyApp):
         exception_handler = ExceptionLoggingHandler()
         logging.getLogger().addHandler(exception_handler)
 
-    def init_flask_instrumentor(app: DifyApp):
+    def init_flask_instrumentor(app: Flask):
         meter = get_meter("http_metrics", version=dify_config.project.version)
         _http_response_counter = meter.create_counter(
             "http.server.response.count",
@@ -81,7 +81,7 @@ def init_app(app: DifyApp):
             logging.info("Initializing Flask instrumentor")
         instrumentor.instrument_app(app, response_hook=response_hook)
 
-    def init_sqlalchemy_instrumentor(app: DifyApp):
+    def init_sqlalchemy_instrumentor(app: Flask):
         with app.app_context():
             engines = list(app.extensions["sqlalchemy"].engines.values())
             SQLAlchemyInstrumentor().instrument(enable_commenter=True, engines=engines)

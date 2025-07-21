@@ -7,10 +7,10 @@ from logging.handlers import RotatingFileHandler
 import flask
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     log_handlers: list[logging.Handler] = []
     log_file = dify_config.LOG_FILE
     if log_file:

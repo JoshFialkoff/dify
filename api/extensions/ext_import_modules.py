@@ -1,5 +1,5 @@
-from dify_app import DifyApp
+from dify_app import Flask
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     from events import event_handlers  # noqa: F401

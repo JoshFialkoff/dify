@@ -6,7 +6,7 @@ from flask_login import user_loaded_from_request, user_logged_in
 from werkzeug.exceptions import NotFound, Unauthorized
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import Flask
 from extensions.ext_database import db
 from libs.passport import PassportService
 from models.account import Account, Tenant, TenantAccountJoin
@@ -113,5 +113,5 @@ def unauthorized_handler():
     )
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     login_manager.init_app(app)

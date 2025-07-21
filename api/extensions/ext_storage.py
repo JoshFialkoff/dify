@@ -5,7 +5,7 @@ from typing import Literal, Union, overload
 from flask import Flask
 
 from configs import dify_config
-from dify_app import DifyApp
+from dify_app import app
 from extensions.storage.base_storage import BaseStorage
 from extensions.storage.storage_type import StorageType
 
@@ -109,5 +109,5 @@ class Storage:
 storage = Storage()
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     storage.init_app(app)

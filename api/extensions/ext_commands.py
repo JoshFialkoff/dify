@@ -1,7 +1,7 @@
-from dify_app import DifyApp
+from dify_app import Flask
 
 
-def init_app(app: DifyApp):
+def init_app(app: Flask):
     from commands import (
         add_qdrant_index,
         clear_free_plan_tenant_expired_logs,
